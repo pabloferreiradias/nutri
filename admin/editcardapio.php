@@ -10,7 +10,8 @@ include ("classes/cardapioController.php");
 
 $cardapioController = new CardapioController();
 
-$cardapios = $cardapioController->getTodosCardapios();
+$cardapio = $cardapioController->getCardapio($_GET['id']);
+$pratos = $cardapioController->getPratosPorCardapio($_GET['id']);
 
 ?>
 
@@ -45,12 +46,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					event.preventDefault();
 					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 				});
-			});
 
-		function editCardapio(id){
-			window.location.href='http://'+window.location.hostname+'/admin/editcardapio.php?id='+id;
-		}
-	
+                $('#myTabs a').click(function (e) {
+                    e.preventDefault()
+                    $(this).tab('show')
+                });
+			});
 	</script>
 <!-- //end-smoth-scrolling -->
 <!-- animated-css -->
@@ -100,32 +101,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="container">
     <div class="single">
         <div>		
-			<h3>Cardápios</h3>
-            <table class="table table-hover">
-                <thead>
-					<tr>
-						<th>Nome</th>
-						<th>Status</th>
-						<th>Imagem</th>
-						<th colspan="2">&nbsp;</th>
-					</tr>
-				</thead>
-                <tbody>
-                    <?php if (count($cardapios) < 1 ):?>
-                        <tr>
-                            <td colspan="5">Nenhum Cardapio registrado</td>
-                        </tr>
-                    <?php else: ?>
-                    <?php foreach ($cardapios as $cardapio): ?>
-                    <tr>
-                        <td onclick="editCardapio("<?php echo $cardapio['id'] ?>")"><?php echo $cardapio['nome'] ?></td>
-                        <td onclick="editCardapio("<?php echo $cardapio['id'] ?>")"><?php echo $cardapio['status'] ?></td>
-                        <td onclick="editCardapio("<?php echo $cardapio['id'] ?>")"><?php echo $cardapio['imagem'] ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-			</table>		
+			<h3>Cardápio</h3>
+             <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Dados Cardapio</a></li>
+                <li role="presentation"><a href="#pratos" aria-controls="pratos" role="tab" data-toggle="tab">Pratos</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <form action="editcardapioform.php" method="post">
+                    <div class="form-group">
+                        <label for="nomeCardapio">Nome do Cardapio</label>
+                        <input type="text" class="form-control" id="nomeCardapio" placeholder="Cardapio">
+                    </div>
+                    <div class="form-group">
+                        <label for="imagemCardapio">
+                        <?php
+                        if ($cardapio['imagem']){
+                            echo '<img src="../imagens/'.$cardapio['imagem'].'" width="100px" />';
+                        }else{
+                            echo 'Sem imagem';
+                        }
+                        ?>
+                        </label>
+                        <input type="file" id="imagemCardapio">
+                        <p class="help-block">Selecione a imagem aqui.</p>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                        <input type="checkbox" <?php echo $cardapio['status'] == '1' ? 'checked' : '' ?>> Ativo </label>
+                    </div>
+                    <input type="hidden" id="idCardapio" name="idCardapio" value="<?php echo $cardapio['id']?>" />
+                    <button type="submit" class="btn btn-default">Editar</button>
+                    </form>
+                
+                </div>
+                <div role="tabpanel" class="tab-pane" id="pratos">
+                    Pratos
+                
+                </div>
+            </div>	
         </div>
     </div>
 </div>
