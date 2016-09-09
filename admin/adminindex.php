@@ -26,12 +26,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery-1.11.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <!-- Custom Theme files -->
 <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
 </script>
 <meta name="keywords" content="Food Stuff Responsive web template, Bootstrap Web Templates, Flat Web Templates, AndriodCompatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <!--Google Fonts-->
@@ -118,9 +119,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <?php else: ?>
                     <?php foreach ($cardapios as $cardapio): ?>
                     <tr>
-                        <td onclick="editCardapio("<?php echo $cardapio['id'] ?>")"><?php echo $cardapio['nome'] ?></td>
-                        <td onclick="editCardapio("<?php echo $cardapio['id'] ?>")"><?php echo $cardapio['status'] ?></td>
-                        <td onclick="editCardapio("<?php echo $cardapio['id'] ?>")"><?php echo $cardapio['imagem'] ?></td>
+                        <td onclick="editCardapio('<?php echo $cardapio['id'] ?>')"><?php echo $cardapio['nome'] ?></td>
+                        <td onclick="editCardapio('<?php echo $cardapio['id'] ?>')"><?php echo $cardapio['status'] ?></td>
+                        <td onclick="editCardapio('<?php echo $cardapio['id'] ?>')"><?php echo $cardapio['imagem'] ?></td>
                     </tr>
                     <?php endforeach; ?>
                     <?php endif; ?>
