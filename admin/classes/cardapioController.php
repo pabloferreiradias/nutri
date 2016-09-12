@@ -3,7 +3,7 @@
 class CardapioController{
 
     public function getCardapios(){
-        include ("../php/config/connect.php");
+        include ($_SERVER['DOCUMENT_ROOT']."/php/config/connect.php");
         $sql = "SELECT * FROM cardapio WHERE ativo='1'";
         $cardapios = $conn->query($sql);
         $conn->close();
@@ -12,7 +12,7 @@ class CardapioController{
     }
 
      public function getTodosCardapios(){
-        include ("../php/config/connect.php");
+        include ($_SERVER['DOCUMENT_ROOT']."/php/config/connect.php");
         $sql = "SELECT * FROM cardapio";
         $cardapios = $conn->query($sql);
         $conn->close();
@@ -21,7 +21,7 @@ class CardapioController{
     }
 
     public function getCardapio($id){
-        include ("../php/config/connect.php");
+        include ($_SERVER['DOCUMENT_ROOT']."/php/config/connect.php");
         $sql = "SELECT * FROM cardapio WHERE id='".$id."'";
         $result = $conn->query($sql);
         $cardapio = $result->fetch_assoc();
@@ -31,7 +31,7 @@ class CardapioController{
     }
 
     public function getPratosPorCardapio($id){
-        include ("../php/config/connect.php");
+        include ($_SERVER['DOCUMENT_ROOT']."/php/config/connect.php");
         $sql = "SELECT * FROM pratos WHERE id_cardapio='".$id."' ORDER BY posicao ASC";
         $pratos = array();
         $resposta = $conn->query($sql);
@@ -49,16 +49,31 @@ class CardapioController{
         return $pratos;
     }
 
+    public function setPratosPorCardapio($params){
+        include ($_SERVER['DOCUMENT_ROOT']."/php/config/connect.php");
+        
+        foreach($params['pratos'] as $posicao => $texto){
+            $sql = "UPDATE pratos SET";
+            $texto = $conn->real_escape_string($texto);
+            $sql .= " texto='".$texto."'";
+            $sql .= " WHERE posicao='".$posicao."' AND id_cardapio=".$params['id'];
+            $resultado = $conn->query($sql);
+        }
+
+        $conn->close();
+        return $resultado;
+    }
+
     public function setCardapio($params){
-        include ("../php/config/connect.php");
+        include ($_SERVER['DOCUMENT_ROOT']."/php/config/connect.php");
         $sql = "UPDATE cardapio SET";
         foreach($params as $key => $value){
             if ($key == 'id') continue;
-            $sql .= " '".$key."'='".$value."',";
+            $sql .= " ".$key."='".$value."',";
         }
         $sql = substr($sql, 0, -1);
-        $sql .= " WHERE 'id'=".$params['id'];
-        
+        $sql .= " WHERE id=".$params['id'];
+
         $resultado = $conn->query($sql);
         $conn->close();
 

@@ -1,5 +1,5 @@
 <?php
-include ("../php/config/connect.php");
+include ($_SERVER['DOCUMENT_ROOT']."/php/config/connect.php");
 
 function criarSessao($usuario){
 	session_start();

@@ -1,3 +1,12 @@
+<?php
+include ("admin/classes/cardapioController.php");
+
+$cardapioController = new CardapioController();
+
+$pratos = $cardapioController->getPratosPorCardapio($_GET['id']);
+
+?>
+
 <!--Author: W3layouts
 Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
@@ -7,6 +16,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
 <title>Nutre Marmitaria</title>
+
+<link href="css/style_2.css" rel="stylesheet" type="text/css" media="all" />
+<link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-1.11.0.min.js"></script>
@@ -47,10 +59,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="top-nav">
 						<span class="menu"> </span>
 					<ul>
-					
-					    <li><a href="index.html"><img src="images/lo.png" alt=""></a></li>				
-						<li><a href="index.html" class="active">Home</a></li>
-						<li><a href="menu.php">Cardárpio da semana</a></li>
+					    <li><a href="index.html"><img src="images/lo.png" alt=""></a></li>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="menu.php" class="active">Carárpio da semana</a></li>
 						<li><a href="pedido.html">Como fazer seus pedidos</li>
 						<li><a href="contact.html">Contato</a></li>
 						<li><a href="https://www.facebook.com/nutremarmitariasaudavel/?fref=ts" target="_blank"><img style="width: 48px; height: 48px;" alt="" src="images/face.png" title="Facebook" /></a ></li>
@@ -80,31 +91,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			
 <!--navgaton end here-->
 <body>
-<!--banner start here-->
-<div class="banner">
-	<div class="header">
-			<div class="container">
-		      <div class="header-main">
-				<div class="logo wow bounceInLeft" data-wow-delay="0.5s">
-					
-				</div>
-				<div class="head-right wow bounceInRight" data-wow-delay="0.5s">
-					<ul>
-						<li><span class="whats"></span><h4>(19) 9 8453 - 2112 | 9 9905 - 6311</h4></li>
-						<li><a href="mailto:contato@nutremarmitaria.com.br"><span class="email"> </span>contato@nutremarmitaria.com.br</a></li>
-					</ul>
-				</div>
-			  <div class="clearfix"> </div>
-			</div>
-			<div class="banner-main">
-				<h2>Bem Vindo a Nutre Marmitaria!</h2>
-							
-			</div>
-		</div>
-	</div>
-</div>
-<!--baner end here-->
 
+
+<!--single page start here-->
+<div class="container">
+<div class="single">
+<div align="center">
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <img class="img-responsive sin-on" src="images/cardapiotop.png" width="100%" alt="" />
+
+        <?php foreach($pratos as $posicao => $texto): ?>
+            <div class="col-md-4 pratos <?php echo $posicao ?>">
+            <span class="caption"><?php echo $posicao ?></span>
+                <?php $frases = explode('(l)',$texto);
+                    foreach($frases as $frase): ?>
+                        <p><?php echo $frase ?></p>
+                    <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+        <img class="img-responsive sin-on" src="images/cardapiofooter.png" width="100%" alt="" />
+    </div>		
+</div>
+</div>
+</br>
+</br>
+</div>
+
+<!---->	
+					
+</div>
+</div>
+</div>
+<!--single page end here-->
 <!--footer start here-->
 <div class="footer">
 	<div class="container">
@@ -117,5 +136,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 </div>
 <!--footer end here-->
+
 </body>
 </html>

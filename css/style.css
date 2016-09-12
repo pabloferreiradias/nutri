@@ -2064,3 +2064,42 @@ h3.typo1 {
 } 
 }
 /*--media quries end here--*/
+
+/* CLASSES CUSTOMIZADAS */
+
+.pratos{
+  height: 390px;
+  font-size: 24px;
+  text-align: left;
+}
+
+.pratos p{
+  margin-bottom: 40px;
+}
+
+.pratos .caption{
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+
+    width: 36px;
+    height: 36px;
+    padding: 4px 8px 4px 8px;
+    
+    background: #245237;
+    border: 2px solid #245237;
+    color: #fff;
+}
+
+.A, .B{
+  border-right: 5px solid #f58634;
+  border-bottom: 5px solid #f58634; 
+}
+
+.C{
+  border-bottom: 5px solid #f58634; 
+}
+
+.D, .E{
+  border-right: 5px solid #f58634;
+}
+

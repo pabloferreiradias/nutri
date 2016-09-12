@@ -1,3 +1,13 @@
+<?php
+include ("admin/classes/cardapioController.php");
+
+$cardapioController = new CardapioController();
+
+$cardapios = $cardapioController->getTodosCardapios();
+$count = 0;
+
+?>
+
 <!--Author: W3layouts
 Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
@@ -47,10 +57,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="top-nav">
 						<span class="menu"> </span>
 					<ul>
-					
-					    <li><a href="index.html"><img src="images/lo.png" alt=""></a></li>				
-						<li><a href="index.html" class="active">Home</a></li>
-						<li><a href="menu.php">Cardárpio da semana</a></li>
+					    <li><a href="index.html"><img src="images/lo.png" alt=""></a></li>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="menu.php" class="active">Carárpio da semana</a></li>
 						<li><a href="pedido.html">Como fazer seus pedidos</li>
 						<li><a href="contact.html">Contato</a></li>
 						<li><a href="https://www.facebook.com/nutremarmitariasaudavel/?fref=ts" target="_blank"><img style="width: 48px; height: 48px;" alt="" src="images/face.png" title="Facebook" /></a ></li>
@@ -80,31 +89,53 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			
 <!--navgaton end here-->
 <body>
-<!--banner start here-->
-<div class="banner">
-	<div class="header">
-			<div class="container">
-		      <div class="header-main">
-				<div class="logo wow bounceInLeft" data-wow-delay="0.5s">
-					
-				</div>
-				<div class="head-right wow bounceInRight" data-wow-delay="0.5s">
-					<ul>
-						<li><span class="whats"></span><h4>(19) 9 8453 - 2112 | 9 9905 - 6311</h4></li>
-						<li><a href="mailto:contato@nutremarmitaria.com.br"><span class="email"> </span>contato@nutremarmitaria.com.br</a></li>
-					</ul>
-				</div>
-			  <div class="clearfix"> </div>
+
+
+<!--manu start here-->
+<div class="menu">
+	<div class="container">
+		<div class="menu-main">
+			<div class="menu-head">
+			  <h3>Marmitas Saudáveis</h3>
+			  <p>Somos uma empresa que se preocupa com a alimentação, por isso desenvolvemos uma solução adequada de refeição pratica, rápida, balanceada e saudável. Nós preparamos a sua alimentação, congelamos e entregamos, é só descongelar e está pronto.</br>
+				Diariamente, você precisa ingerir quantidades diferentes de carboidratos, proteínas, vitaminas e minerais, por isso, buscamos os melhores e mais frescos ingredientes. Não utilizamos conservantes e nossos pratos contem pouco teor de sódio e óleo. Adicionamos conhecimento, dedicação e amor para preparar pratos que atendam suas necessidades.
+</p>				
 			</div>
-			<div class="banner-main">
-				<h2>Bem Vindo a Nutre Marmitaria!</h2>
-							
+			<div class="menu-top">
+                    <?php foreach($cardapios as $cardapio): ?>
+                        <?php if($count == 0 || $count == 3): ?>
+                            <div class="menu-top-grids mgd1 wow bounceInRight" data-wow-delay="0.5s">
+                        <?php endif; ?>
+                        <div class="col-md-4 menu-items">
+						    <a href="cardapio.php?id=<?php echo $cardapio['id']; ?>"><img src="images/<?php echo $cardapio['imagem']; ?>" alt="" class="img-responsive"></a>
+						    <h4><a href="cardapio.php?id=<?php echo $cardapio['id']; ?>"><?php echo $cardapio['nome']; ?></a></h4>
+						</div>
+                        <?php if($count == 2): ?>
+                            <div class="clearfix"> </div>
+                            </div>
+                            </br>
+                            </br>
+                            </br>
+                        <?php endif; ?>
+                        <?php if($count == 5): ?>
+                            <div class="clearfix"> </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                                </br>
+                                </br>
+                        <?php endif; ?>
+                        <?php $count++; ?>
+                    <?php endforeach; ?>
+
+				  <div class="clearfix"> </div>
+				</div>
 			</div>
-		</div>
+	   </div>
 	</div>
 </div>
-<!--baner end here-->
-
+<!--menu end here-->
 <!--footer start here-->
 <div class="footer">
 	<div class="container">
@@ -117,5 +148,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 </div>
 <!--footer end here-->
+
 </body>
 </html>

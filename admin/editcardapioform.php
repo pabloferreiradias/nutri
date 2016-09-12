@@ -10,7 +10,11 @@ include ("classes/cardapioController.php");
 $cardapioController = new CardapioController();
 
 $nomeCardapio = $_POST['nomeCardapio'];
-$statusCardapio = $_POST['statusCardapio'];
+if(isset($_POST['statusCardapio'])){
+    $statusCardapio = 1;
+}else{
+    $statusCardapio = 0;
+}
 $idCardapio = $_POST['idCardapio'];
 $params = array('id' => $idCardapio,
                 'nome' => $nomeCardapio,
